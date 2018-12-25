@@ -1,5 +1,3 @@
-#add solution for the metals with more than 1 possible charge
-#     All that remains appears to be an issue because it doesn't give total number of each atom in an ionic bond
 #add solution for the transition metals and the lanthanids and Actinides
 
 import random
