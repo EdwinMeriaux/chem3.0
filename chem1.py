@@ -1,5 +1,5 @@
 #add solution for the transition metals and the lanthanids and Actinides
-
+#
 import random
 
 class periodic_table:
