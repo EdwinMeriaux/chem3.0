@@ -2,6 +2,56 @@
 #
 import random
 
+class polyatomics:
+	def __init__(self,name,elements,pos_neg,charge):
+		self.name = name
+		self.elements = elements
+		self.pos_neg = pos_neg
+		self.charge = charge
+
+Nitrite = polyatomics('Nitrite','NO2','negative',-1)
+Nitrate = polyatomics('Nitrate','NO3','negative',-1)
+Sulfite = polyatomics('Sulfite','SO3','negative',-2)
+Sulfate = polyatomics('Sulfate','SO4','negative',-2)
+Phosphite = polyatomics('Phosphite','PO3','negative',-3)
+Phosphate = polyatomics('Phosphate','PO4','negative',-3)
+Carbonate = polyatomics('Carbonate','CO3','negative',-2)
+Hydroxide = polyatomics('Hydroxide','OH','negative',-1)
+Hypochlorite = polyatomics('Hypochlorite','ClO','negative',-1)
+Chlorite = polyatomics('Chlorite','ClO2','negative',-1)
+Chlorate = polyatomics('Chlorate','ClO3','negative',-1)
+Perchlorate = polyatomics('Perchlorate','ClO4','negative',-1)
+Permanganate = polyatomics('Permanganate','MnO4','negative',-1)
+Acetate = polyatomics('Acetate','C2H3O2','negative',-1)
+Hydrogen_Carbonate = polyatomics('Hydrogen Carbonate','HCO3','negative',-1)
+Ammonium = polyatomics('Ammonium','NH4','negative',+1)
+Iodate = polyatomics('Iodate','IO3','negative',-1)
+
+class polyatomics2:
+	def __init__(self,name,elements,pos_neg,charge):
+		self.name2 = name
+		self.elements2 = elements
+		self.pos_neg2 = pos_neg
+		self.charge2 = charge
+
+NO2 = polyatomics('Nitrite','NO2','negative',-1)
+NO3 = polyatomics('Nitrate','NO3','negative',-1)
+SO3 = polyatomics('Sulfite','SO3','negative',-2)
+SO4 = polyatomics('Sulfate','SO4','negative',-2)
+PO3 = polyatomics('Phosphite','PO3','negative',-3)
+PO4 = polyatomics('Phosphate','PO4','negative',-3)
+CO3 = polyatomics('Carbonate','CO3','negative',-2)
+OH = polyatomics('Hydroxide','OH','negative',-1)
+ClO = polyatomics('Hypochlorite','ClO','negative',-1)
+ClO2 = polyatomics('Chlorite','ClO2','negative',-1)
+ClO3 = polyatomics('Chlorate','ClO3','negative',-1)
+ClO4 = polyatomics('Perchlorate','ClO4','negative',-1)
+MnO4 = polyatomics('Permanganate','MnO4','negative',-1)
+C2H3O2 = polyatomics('Acetate','C2H3O2','negative',-1)
+HCO3 = polyatomics('Hydrogen Carbonate','HCO3','negative',-1)
+NH4 = polyatomics('Ammonium','NH4','negative',+1)
+IO3 = polyatomics('Iodate','IO3','negative',-1)
+
 class periodic_table:
 	def __init__(self,initial,name,atomic_number,atomic_mass,valence_e,metal_or_not,nonmetal_or_not,noble_gas,row,column,electronegativity):
 		self.initial = initial
@@ -19,6 +69,7 @@ class periodic_table:
 		self.row = row
 		self.column = column
 		self.electronegativity = electronegativity
+
 	def ionic_bonding(atom1,atom2):
 		if (atom1.metal_or_not == 'yes' and atom2.metal_or_not == 'no' and atom2.nonmetal_or_not == 'yes') or (atom1.initial == 'H' and atom2.metal_or_not == 'no' and atom2.nonmetal_or_not == 'yes'):
 			if (atom1.valence_e+atom2.valence_e == 2 or atom1.valence_e+atom2.valence_e == 8):
@@ -536,21 +587,41 @@ def start():
 	global charge2
 	charge1 = 0
 	charge2 = 0
-	atom1 = input('please input the initial for atom1 ')
-	atom2 = input('please input the initial for atom2 ')
-	if len(atom1) <= 2 and len(atom2)<= 2:
-		atom11 = eval(atom1)
-		if int(atom11.valence_e[0]) != int(atom11.valence_e[1]):
+	answer = input('are you inputing a polyatomic element in the two elements?')
+	if answer == 'no':
+		atom1 = input('please input the initial for atom1 ')
+		atom2 = input('please input the initial for atom2 ')
+		if len(atom1) <= 2 and len(atom2)<= 2:
+			atom11 = eval(atom1)
+			if int(atom11.valence_e[0]) != int(atom11.valence_e[1]):
+				charge1 = int(input("input needed " + atom1 + " has two valence charges " + str(atom11.valence_e[0]) + " and " + str(atom11.valence_e[1]) + " if you want the first one input zero if you want the second one input 1 "))
+			atom22 = eval(atom2)
+			if int(atom22.valence_e[0]) != int(atom22.valence_e[1]):
+				charge2 = int(input("input needed " + atom1 + " has two valence charges " + str(atom22.valence_e[0]) + " and " + str(atom22.valence_e[1]) + " if you want the first one input zero if you want the second one input 1 "))
+			periodic_table.ionic_bonding_and_number_identifier_and_covalent_identifier(atom11,charge1,atom22,charge2)
+			restart()
+		elif len(atom1) > 2 or len(atom2) > 2:
+			print('input is too big there is no atom who with an initial longer than two letters. The code is now restarting')
+			start()
+		else:
+			print('invalid input restarting code')
+			start()
+	elif answer == 'yes':
+		print('please just input the polyatomic first and the element after')
+		polyatomic = input('please input the polyatomic initials')
+		if len(polyatomic)>6:
+			print('invalid input for the atom please restart')
+		atom = input('please input the initial for the atom')
+		if len(atom) > 2:
+			print('invalid input for the atom please restart')
+		atom = eval(atom)
+		polyatomic = eval(polyatomic)
+		if int(atom.valence_e[0]) != int(atom.valence_e[1]):
 			charge1 = int(input("input needed " + atom1 + " has two valence charges " + str(atom11.valence_e[0]) + " and " + str(atom11.valence_e[1]) + " if you want the first one input zero if you want the second one input 1 "))
-		atom22 = eval(atom2)
-		if int(atom22.valence_e[0]) != int(atom22.valence_e[1]):
-			charge2 = int(input("input needed " + atom1 + " has two valence charges " + str(atom22.valence_e[0]) + " and " + str(atom22.valence_e[1]) + " if you want the first one input zero if you want the second one input 1 "))
-		periodic_table.ionic_bonding_and_number_identifier_and_covalent_identifier(atom11,charge1,atom22,charge2)
+		periodic_table.ionic_bonding_and_number_identifier_and_covalent_identifier(atom,charge1,polyatomic,charge2)
 		restart()
-	elif len(atom1) > 2 or len(atom2) > 2:
-		print('input is too big there is no atom who with an initial longer than two letters. The code is now restarting')
-		start()
 	else:
-		print('invalid input restarting code')
+		print('invalid answer')
+		print('restarting')
 		start()
 start()
